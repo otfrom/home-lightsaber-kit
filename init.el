@@ -154,6 +154,11 @@
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'post-forward)
 
+;; Delete that horrible trailing whitespace
+(add-hook 'before-save-hook
+          (lambda nil
+            (delete-trailing-whitespace)))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Platform specific stuff
 
@@ -173,4 +178,3 @@
 ;; fix yer speling
 (when (memq window-system '(mac ns))
   (setq ispell-program-name (executable-find "aspell")))
-
