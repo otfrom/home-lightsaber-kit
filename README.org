@@ -1,0 +1,11 @@
+* Overview
+
+  This is a minimal-ish emacs config for clojure and magit with a few niceties.
+
+* Installation
+
+  git clone it to a nice location and then symbolically link it to ~/.emacs.d
+
+* License
+
+  GPL Probably.
