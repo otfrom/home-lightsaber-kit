@@ -70,8 +70,17 @@
 ;;                   [refactor-nrepl "2.0.0-SNAPSHOT"]]
 ;;         :repl-options {:init (set! *print-length* 200)}}}
 
+;; Show my parens
+(show-paren-mode 1)
+
+;; Don't trash the repl history
+(setq cider-repl-history-file (concat user-emacs-directory "cider-history"))
+
 ;; Turn on company for completion everywhere
 (global-company-mode)
+
+;; Turn on projectile for completion everywhere
+(projectile-global-mode)
 
 ;; CIDER configuration
 ;; Loads more information in the excellent README.md here:
