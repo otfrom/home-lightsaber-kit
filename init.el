@@ -19,7 +19,6 @@
 (require 'diminish)
 
 (use-package magit
-             :ensure t)
   :ensure t
   :pin melpa-stable)
 
