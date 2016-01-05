@@ -3,7 +3,7 @@
 (require 'package)
 (setq package-archives '(("melpa-stable" . "http://melpa-stable.milkbox.net/packages/")
 			 ("melpa" . "http://melpa.milkbox.net/packages/")
-                         ("elpa" . "http://elpa.gnu.org/packages/")))
+			 ("elpa" . "http://elpa.gnu.org/packages/")))
 
 ;; This means we prefer things from ~/.emacs.d/elpa over the standard
 ;; packages.
