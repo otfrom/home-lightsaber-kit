@@ -2,6 +2,7 @@
 ;; elsewhere. This is a minimal setup to get packages going.
 (require 'package)
 (setq package-archives '(("melpa-stable" . "http://melpa-stable.milkbox.net/packages/")
+			 ("melpa" . "http://melpa.milkbox.net/packages/")
                          ("elpa" . "http://elpa.gnu.org/packages/")))
 
 ;; This means we prefer things from ~/.emacs.d/elpa over the standard
@@ -19,3 +20,15 @@
 
 (use-package magit
              :ensure t)
+  :ensure t
+  :pin melpa-stable)
+
+(use-package projectile
+  :ensure t
+  :pin melpa-stable
+  :init
+  (setq projectile-enable-caching t)
+  :diminish projectile-mode
+  :config
+  (projectile-global-mode 1))
+
