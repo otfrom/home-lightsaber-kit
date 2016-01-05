@@ -39,5 +39,31 @@
   :config
   (projectile-global-mode 1))
 
+(use-package company
+  :ensure t
+  :pin melpa-stable
+  :diminish company-mode
+  :config
+  (global-company-mode))
+
+(use-package highlight-symbol
+  :ensure t
+  :pin melpa-stable
+  :defer t)
+
+(use-package paredit
+  :ensure t
+  :pin melpa-stable
+  :defer t
+  :diminish paredit-mode)
+
+(use-package eldoc
+  :diminish eldoc-mode)
+
+(use-package rainbow-delimiters
+  :ensure t
+  :pin melpa-stable
+  :defer t)
+
 ;; Display Tweaking
 (load-theme 'wheatgrass)
