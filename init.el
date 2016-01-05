@@ -1,7 +1,7 @@
 ;; Everything will be configured using packages from melpa or
 ;; elsewhere. This is a minimal setup to get packages going.
 (require 'package)
-(setq package-archives '(("melpa" . "http://melpa.milkbox.net/packages/")
+(setq package-archives '(("melpa-stable" . "http://melpa-stable.milkbox.net/packages/")
                          ("elpa" . "http://elpa.gnu.org/packages/")))
 
 ;; This means we prefer things from ~/.emacs.d/elpa over the standard
