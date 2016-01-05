@@ -13,10 +13,18 @@
   (package-refresh-contents)
   (package-install 'use-package))
 
-(eval-when-compile (require 'use-package))
+(eval-when-compile
+  (require 'use-package))
 (defvar use-package-verbose t)
 (require 'bind-key)
 (require 'diminish)
+
+(use-package emacs-lisp
+  :init
+  (add-hook 'emacs-lisp-mode-hook #'eldoc-mode)
+  (add-hook 'emacs-lisp-mode-hook #'rainbow-delimiters-mode)
+  (add-hook 'emacs-lisp-mode-hook #'show-paren-mode)
+  (add-hook 'emacs-lisp-mode-hook #'paredit-mode))
 
 (use-package magit
   :ensure t
