@@ -65,6 +65,46 @@
   :pin melpa-stable
   :defer t)
 
+(use-package clojure-mode
+  :ensure t
+  :pin melpa-stable
+  :mode (("\\.clj\\'" . clojure-mode)
+	 ("\\.edn\\'" . clojure-mode))
+  :init
+  (add-hook 'clojure-mode-hook #'eldoc-mode)
+  (add-hook 'clojure-mode-hook #'show-paren-mode)
+  (add-hook 'clojure-mode-hook #'paredit-mode)
+  (add-hook 'clojure-mode-hook #'rainbow-delimiters-mode))
+
+(use-package cider
+  :ensure t
+  :pin melpa-stable
+  :defer t
+  :init
+  (add-hook 'cider-mode-hook #'clj-refactor-mode)
+  (add-hook 'cider-mode-hook #'rainbow-delimiters-mode)
+  (add-hook 'cider-mode-hook #'show-paren-mode)
+  (add-hook 'cider-mode-hook #'paredit-mode)
+  (add-hook 'cider-mode-hook #'eldoc-mode)
+  :diminish subword-mode
+  :config
+  (setq cider-repl-history-file (concat user-emacs-directory "cider-history")
+	cider-repl-use-clojure-font-lock t
+	cider-overlays-use-font-lock t
+	cider-repl-result-prefix ";; => "
+	cider-interactive-eval-result-prefix ";; => ")
+  (cider-repl-toggle-pretty-printing))
+
+(use-package cider-eval-sexp-fu
+  :ensure t
+  :pin melpa-stable
+  :defer t)
+
+(use-package clj-refactor
+  :ensure t
+  :pin melpa-stable
+  :defer t)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Display Tweaking
 (load-theme 'wheatgrass)
