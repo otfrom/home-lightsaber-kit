@@ -31,3 +31,5 @@
   :config
   (projectile-global-mode 1))
 
+;; Display Tweaking
+(load-theme 'wheatgrass)
