@@ -28,7 +28,41 @@
 
 (use-package magit
   :ensure t
-  :pin melpa-stable)
+  :pin melpa-stable
+  :bind (("C-c g" . magit-status)))
+
+(use-package smex
+  :ensure t
+  :pin melpa-stable
+  :bind (("M-x" . smex))
+  :config (smex-initialize))  ; smart meta-x (use IDO in minibuffer)
+
+(use-package ido
+  :ensure t
+  :demand t
+  :pin melpa-stable
+  :bind (("C-x b" . ido-switch-buffer))
+  :init
+  (setq ido-create-new-buffer 'always  ; don't confirm when creating new buffers
+        ido-enable-flex-matching t     ; fuzzy matching
+        ido-everywhere t  ; tbd
+        ido-case-fold t)  ; ignore case
+  :config (ido-mode 1))
+
+(use-package ido-ubiquitous
+  :ensure t
+  :pin melpa-stable
+  :config (ido-ubiquitous-mode 1))
+
+(use-package flx-ido
+  :ensure t
+  :pin melpa-stable
+  :config (flx-ido-mode 1))
+
+(use-package ido-vertical-mode
+  :ensure t
+  :pin melpa-stable
+  :config (ido-vertical-mode 1))
 
 (use-package projectile
   :ensure t
