@@ -123,6 +123,7 @@
   :diminish subword-mode
   :config
   (setq cider-repl-history-file (concat user-emacs-directory "cider-history")
+	cider-font-lock-dynamically '(macro core function var)
 	cider-repl-use-clojure-font-lock t
 	cider-overlays-use-font-lock t
 	cider-repl-result-prefix ";; => "
@@ -136,7 +137,7 @@
 
 (use-package clj-refactor
   :ensure t
-  :pin melpa-stable
+  :pin melpa
   :defer t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
