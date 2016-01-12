@@ -140,6 +140,30 @@
   :pin melpa
   :defer t)
 
+(use-package flycheck-pos-tip
+  :ensure t
+  :pin melpa
+  :defer t
+  :config
+  (eval-after-load 'flycheck
+    '(setq flycheck-display-errors-function #'flycheck-pos-tip-error-messages)))
+
+(use-package flycheck
+  :ensure t
+  :pin melpa
+  :defer t
+  :init
+  (add-hook 'after-init-hook #'global-flycheck-mode))
+
+(use-package flycheck-clojure
+  :ensure t
+  :pin melpa
+  :defer t
+  :init
+  (eval-after-load 'flycheck '(flycheck-clojure-setup)))
+
+
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Display Tweaking
 (load-theme 'wheatgrass)
