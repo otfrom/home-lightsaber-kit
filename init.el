@@ -219,6 +219,11 @@
           (lambda nil
             (delete-trailing-whitespace)))
 
+;; downcase, upcase and narrow-to-region
+(put 'downcase-region 'disabled nil)
+(put 'upcase-region 'disabled nil)
+(put 'narrow-to-region 'disabled nil)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Platform specific stuff
 
