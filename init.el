@@ -227,6 +227,9 @@
 ;; tab indentation (outside of makefiles) is evil
 (setq-default indent-tabs-mode nil)
 
+;; human readable dired
+(setq dired-listing-switches "-alh")
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Platform specific stuff
 
