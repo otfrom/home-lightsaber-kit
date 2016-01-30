@@ -1,5 +1,14 @@
+;;; init --- A home light saber kit
+
+;; Copyright (C) 2016 Mastodon C Ltd
+
+;;; Commentary:
+
 ;; Everything will be configured using packages from melpa or
-;; elsewhere. This is a minimal setup to get packages going.
+;; elsewhere.  This is a minimal setup to get packages going.
+
+;;; Code:
+
 (require 'package)
 (setq package-archives '(("melpa-stable" . "http://melpa-stable.milkbox.net/packages/")
 			 ("melpa" . "http://melpa.milkbox.net/packages/")
