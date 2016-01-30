@@ -224,6 +224,9 @@
 (put 'upcase-region 'disabled nil)
 (put 'narrow-to-region 'disabled nil)
 
+;; tab indentation (outside of makefiles) is evil
+(setq-default indent-tabs-mode nil)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Platform specific stuff
 
