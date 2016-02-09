@@ -28,12 +28,17 @@
 (require 'bind-key)
 (require 'diminish)
 
+(use-package aggressive-indent
+  :ensure t
+  :pin melpa)
+
 (use-package emacs-lisp
   :init
   (add-hook 'emacs-lisp-mode-hook #'eldoc-mode)
   (add-hook 'emacs-lisp-mode-hook #'rainbow-delimiters-mode)
   (add-hook 'emacs-lisp-mode-hook #'show-paren-mode)
-  (add-hook 'emacs-lisp-mode-hook #'paredit-mode))
+  (add-hook 'emacs-lisp-mode-hook #'paredit-mode)
+  (add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode))
 
 (use-package magit
   :ensure t
@@ -129,6 +134,7 @@
   (add-hook 'cider-mode-hook #'show-paren-mode)
   (add-hook 'cider-mode-hook #'paredit-mode)
   (add-hook 'cider-mode-hook #'eldoc-mode)
+  (add-hook 'cider-mode-hook #'aggressive-indent-mode)
   :diminish subword-mode
   :config
   (setq cider-repl-history-file (concat user-emacs-directory "cider-history")
@@ -170,8 +176,6 @@
   :defer t
   :init
   (eval-after-load 'flycheck '(flycheck-clojure-setup)))
-
-
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Display Tweaking
