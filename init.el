@@ -107,7 +107,7 @@
   :ensure t
   :bind (("M-n" . highlight-symbol-next)
          ("M-p" . highlight-symbol-previous))
-  :init (add-hook 'prog-mode-hook #'highlight-symbol-mode))q
+  :init (add-hook 'prog-mode-hook #'highlight-symbol-mode))
 
 (use-package rainbow-delimiters
   :ensure t
