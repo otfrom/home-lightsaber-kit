@@ -24,13 +24,14 @@
         (epl . "melpa-stable")
         (flycheck-pos-tip . "melpa-stable")
         (flycheck . "melpa-stable")
+        (highlight-symbol . "melpa-stable")
         (magit . "melpa-stable")
         (paredit . "melpa-stable")
         (pkg-info . "melpa-stable")
         (pos-tip . "melpa-stable")
+        (rainbow-delimiters . "melpa-stable")
         (seq . "elpa")
-        (use-package . "melpa-stable")
-	))
+        (use-package . "melpa-stable")))
 
 ;; This means we prefer things from ~/.emacs.d/elpa over the standard
 ;; packages.
@@ -60,43 +61,51 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; minor modes
-(defvar lisp-modes '(emacs-lisp-mode-hook
-                     cider-mode-hook
-                     clojure-mode-hook))
+(defvar lisp-mode-hooks '(emacs-lisp-mode-hook lisp-mode-hook))
+(defvar lisp-interaction-mode-hooks '(lisp-interaction-modes-hook))
 
 (use-package aggressive-indent
   :ensure t
-  :pin melpa
   :diminish aggressive-indent-mode
-  :init (dolist (hook lisp-modes)
+  :init (dolist (hook lisp-mode-hooks)
           (add-hook hook #'aggressive-indent-mode)))
 
 (use-package eldoc
   :diminish eldoc-mode
-  :init (dolist (hook lisp-modes)
+  :init (dolist (hook (append lisp-mode-hooks lisp-interaction-mode-hook))
           (add-hook hook #'eldoc-mode)))
 
 (use-package paredit
   :ensure t
   :diminish paredit-mode
-  :init (dolist (hook lisp-modes)
+  :init (dolist (hook lisp-mode-hooks)
           (add-hook hook #'paredit-mode)))
 
 (use-package flycheck-pos-tip
   :ensure t
-  :pin melpa-stable
-  :defer t
   :config
   (eval-after-load 'flycheck
     '(setq flycheck-display-errors-function #'flycheck-pos-tip-error-messages)))
 
 (use-package flycheck
   :ensure t
-  :pin melpa-stable
-  :defer t
   :config
   (add-hook 'after-init-hook #'global-flycheck-mode))
 
+(use-package highlight-symbol
+  :ensure t
+  :bind (("C-c n" . highlight-symbol-next)
+         ("C-c p" . highlight-symbol-previous))
+  :init (add-hook 'prog-mode-hook #'highlight-symbol-mode))
+
+(use-package rainbow-delimiters
+  :ensure t
+  :init (dolist (hook (append lisp-mode-hooks lisp-interaction-mode-hook))
+          (add-hook hook #'rainbow-delimiters-mode)))
+
+(use-package paren
+  :init (dolist (hook (append lisp-mode-hooks lisp-interaction-mode-hook))
+          (add-hook hook #'show-paren-mode)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; major modes
@@ -171,11 +180,6 @@
 ;;   :diminish company-mode
 ;;   :config
 ;;   (global-company-mode))
-
-;; (use-package highlight-symbol
-;;   :ensure t
-;;   :pin melpa-stable
-;;   :defer t)
 
 ;; (use-package paredit
 ;;   :ensure t
