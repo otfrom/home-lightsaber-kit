@@ -26,6 +26,7 @@
         ;; (dash . "melpa-stable")
         (diminish . "melpa-stable")
         (epl . "melpa-stable")
+        (exec-path-from-shell . "melpa-stable")
         (flx . "melpa-stable")
         (flx-ido . "melpa-stable")
         (git-commit . "melpa-stable")
@@ -279,11 +280,9 @@
 (setq default-process-coding-system '(utf-8-unix . utf-8-unix))
 
 ;; get the path from shell
-;; (use-package exec-path-from-shell
-;;   :ensure t
-;;   :defer t
-;;   :pin melpa-stable
-;;   :config (exec-path-from-shell-initialize))
+(use-package exec-path-from-shell
+  :ensure t
+  :init (exec-path-from-shell-initialize))
 
 ;; fix yer speling
 (when (memq window-system '(mac ns))
