@@ -177,6 +177,11 @@
   :init
   (eval-after-load 'flycheck '(flycheck-clojure-setup)))
 
+(use-package swiper
+  :ensure t
+  :pin melpa-stable
+  :bind (("\C-s" . swiper)))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Display Tweaking
 (load-theme 'wheatgrass)
