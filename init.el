@@ -106,8 +106,9 @@
 
 (use-package highlight-symbol
   :ensure t
+  :diminish highlight-symbol
   :bind (("M-n" . highlight-symbol-next)
-         ("M-p" . highlight-symbol-previous))
+         ("M-p" . highlight-symbol-prev))
   :init (add-hook 'prog-mode-hook #'highlight-symbol-mode))
 
 (use-package rainbow-delimiters
