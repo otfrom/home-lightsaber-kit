@@ -73,8 +73,8 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; minor modes
-(defvar lisp-mode-hooks '(emacs-lisp-mode-hook lisp-mode-hook))
-(defvar lisp-interaction-mode-hooks '(lisp-interaction-modes-hook))
+(defvar lisp-mode-hooks '(emacs-lisp-mode-hook lisp-mode-hook clojure-mode-hook))
+(defvar lisp-interaction-mode-hooks '(lisp-interaction-modes-hook cider-mode-hook))
 
 (use-package aggressive-indent
   :ensure t
@@ -112,6 +112,7 @@
 
 (use-package rainbow-delimiters
   :ensure t
+  :diminish rainbow-delimiters
   :init (dolist (hook (append lisp-mode-hooks lisp-interaction-mode-hook))
           (add-hook hook #'rainbow-delimiters-mode)))
 
@@ -169,9 +170,7 @@
 	 ("\\.edn\\'" . clojure-mode)))
 
 (use-package cider-eval-sexp-fu
-  :ensure t
-  :defer t
-  :init (add-hook 'cider-mode-hook #'cider-eval-sexp-fu-mode))
+  :ensure t)
 
 (use-package clj-refactor
   :ensure t
