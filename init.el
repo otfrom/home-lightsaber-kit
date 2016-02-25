@@ -76,22 +76,24 @@
 (defvar lisp-mode-hooks '(emacs-lisp-mode-hook lisp-mode-hook clojure-mode-hook))
 (defvar lisp-interaction-mode-hooks '(lisp-interaction-modes-hook cider-mode-hook))
 
+(defun bld/add-to-hooks (f hooks)
+  "Add funcion F to all HOOKS."
+  (dolist (hook hooks)
+    (add-hook hook f)))
+
 (use-package aggressive-indent
   :ensure t
   :diminish aggressive-indent-mode
-  :init (dolist (hook lisp-mode-hooks)
-          (add-hook hook #'aggressive-indent-mode)))
+  :init (bld/add-to-hooks #'aggressive-indent-mode lisp-mode-hooks))
 
 (use-package eldoc
   :diminish eldoc-mode
-  :init (dolist (hook (append lisp-mode-hooks lisp-interaction-mode-hook))
-          (add-hook hook #'eldoc-mode)))
+  :init (bld/add-to-hooks #'eldoc-mode (append lisp-mode-hooks lisp-interaction-mode-hook)))
 
 (use-package paredit
   :ensure t
   :diminish paredit-mode
-  :init (dolist (hook lisp-mode-hooks)
-          (add-hook hook #'paredit-mode)))
+  :init (bld/add-to-hooks #'paredit-mode lisp-mode-hooks))
 
 (use-package flycheck-pos-tip
   :ensure t
@@ -114,8 +116,8 @@
 (use-package rainbow-delimiters
   :ensure t
   :diminish rainbow-delimiters
-  :init (dolist (hook (append lisp-mode-hooks lisp-interaction-mode-hook))
-          (add-hook hook #'rainbow-delimiters-mode)))
+  :init (bld/add-to-hooks #'rainbow-delimiters-mode
+                          (append lisp-mode-hooks lisp-interaction-mode-hook)))
 
 (use-package paren
   :init (dolist (hook (append lisp-mode-hooks lisp-interaction-mode-hook))
