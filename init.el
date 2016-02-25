@@ -19,19 +19,42 @@
       '((aggressive-indent . "melpa-stable")
         (bind-key . "melpa-stable")
         (cider . "melpa-stable")
+        (cider-eval-sexp-fu . "melpa-stable")
+	(clj-refactor . "melpa-stable")
+        (clojure-mode . "melpa-stable")
+        (company . "melpa-stable")
         ;; (dash . "melpa-stable")
         (diminish . "melpa-stable")
         (epl . "melpa-stable")
+        (flx . "melpa-stable")
+        (flx-ido . "melpa-stable")
+        (git-commit . "melpa-stable")
+        (hydra . "melpa-stable")
+        (ido . "melpa-stable")
+        (ido-completing-read+ . "melpa-stable")
+        (ido-ubiquitous . "melpa-stable")
+        (ido-vertical-mode . "melpa-stable")
         (flycheck-pos-tip . "melpa-stable")
         (flycheck . "melpa-stable")
+        (highlight . "melpa") ;; woo! from the wiki https://www.emacswiki.org/emacs/highlight.el
         (highlight-symbol . "melpa-stable")
+        (inflections . "melpa-stable")
         (magit . "melpa-stable")
+        (magit-popup . "melpa-stable")
+        (multiple-cursors . "melpa-stable")
         (paredit . "melpa-stable")
+        (peg . "melpa-stable")
         (pkg-info . "melpa-stable")
         (pos-tip . "melpa-stable")
+        (projectile . "melpa-stable")
         (rainbow-delimiters . "melpa-stable")
+        (s . "melpa-stable")
         (seq . "elpa")
-        (use-package . "melpa-stable")))
+        (smex . "melpa-stable")
+        (swiper . "melpa-stable")
+        (use-package . "melpa-stable")
+        (with-editor . "melpa-stable")
+        (yasnippet . "melpa-stable")))
 
 ;; This means we prefer things from ~/.emacs.d/elpa over the standard
 ;; packages.
@@ -82,9 +105,9 @@
 
 (use-package highlight-symbol
   :ensure t
-  :bind (("C-c n" . highlight-symbol-next)
-         ("C-c p" . highlight-symbol-previous))
-  :init (add-hook 'prog-mode-hook #'highlight-symbol-mode))
+  :bind (("M-n" . highlight-symbol-next)
+         ("M-p" . highlight-symbol-previous))
+  :init (add-hook 'prog-mode-hook #'highlight-symbol-mode))q
 
 (use-package rainbow-delimiters
   :ensure t
@@ -94,6 +117,23 @@
 (use-package paren
   :init (dolist (hook (append lisp-mode-hooks lisp-interaction-mode-hook))
           (add-hook hook #'show-paren-mode)))
+
+(use-package projectile
+  :ensure t
+  :diminish projectile-mode
+  :config
+  (setq projectile-enable-caching t)
+  (projectile-global-mode 1))
+
+(use-package company
+  :ensure t
+  :diminish company-mode
+  :config
+  (global-company-mode))
+
+(use-package swiper
+  :ensure t
+  :bind (("\C-s" . swiper)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; major modes
@@ -106,118 +146,71 @@
   :config
   (setq ediff-window-setup-function 'ediff-setup-windows-plain))
 
-;; (use-package cider
-;;   :ensure t
-;;   :defer t
-;;   :diminish subword-mode
-;;   :config
-;;   (add-hook 'cider-mode-hook #'highlight-symbol-mode)
-;;   (add-hook 'cider-mode-hook #'clj-refactor-mode)
-;;   (add-hook 'cider-mode-hook #'rainbow-delimiters-mode)
-;;   (add-hook 'cider-mode-hook #'show-paren-mode)
-;;   (add-hook 'cider-mode-hook #'paredit-mode)
-;;   (add-hook 'cider-mode-hook #'eldoc-mode)
-;;   (add-hook 'cider-mode-hook #'aggressive-indent-mode)
-;;   (setq cider-repl-history-file (concat user-emacs-directory "cider-history")
-;; 	cider-font-lock-dynamically '(macro core function var)
-;; 	cider-repl-use-clojure-font-lock t
-;; 	cider-overlays-use-font-lock t
-;; 	cider-repl-result-prefix ";; => "
-;; 	cider-interactive-eval-result-prefix ";; => ")
-;;   (cider-repl-toggle-pretty-printing))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; cider and clojure(script)
 
-;; (use-package smex
-;;   :ensure t
-;;   :pin melpa-stable
-;;   :bind (("M-x" . smex))
-;;   :config (smex-initialize))  ; smart meta-x (use IDO in minibuffer)
+(use-package cider
+  :ensure t
+  :defer t
+  :config
+  (setq cider-repl-history-file (concat user-emacs-directory "cider-history")
+	cider-font-lock-dynamically '(macro core function var)
+	cider-repl-use-clojure-font-lock t
+	cider-overlays-use-font-lock t
+	cider-repl-result-prefix ";; => "
+	cider-interactive-eval-result-prefix ";; => ")
+  (cider-repl-toggle-pretty-printing))
 
-;; (use-package ido
-;;   :ensure t
-;;   :demand t
-;;   :pin melpa-stable
-;;   :bind (("C-x b" . ido-switch-buffer))
-;;   :config (ido-mode 1)
-;;   (setq ido-create-new-buffer 'always  ; don't confirm when creating new buffers
-;;         ido-enable-flex-matching t     ; fuzzy matching
-;;         ido-everywhere t  ; tbd
-;;         ido-case-fold t)) ; ignore case
+(use-package clojure-mode
+  :ensure t
+  :defer t
+  :mode (("\\.clj\\'" . clojure-mode)
+	 ("\\.edn\\'" . clojure-mode)))
 
-;; (use-package ido-ubiquitous
-;;   :ensure t
-;;   :pin melpa-stable
-;;   :config (ido-ubiquitous-mode 1))
+(use-package cider-eval-sexp-fu
+  :ensure t
+  :defer t
+  :init (add-hook 'cider-mode-hook #'cider-eval-sexp-fu-mode))
 
-;; (use-package flx-ido
-;;   :ensure t
-;;   :pin melpa-stable
-;;   :config (flx-ido-mode 1))
+(use-package clj-refactor
+  :ensure t
+  :defer t
+  :init (add-hook 'cider-mode-hook #'clj-refactor-mode))
 
-;; (use-package ido-vertical-mode
-;;   :ensure t
-;;   :pin melpa-stable
-;;   :config (ido-vertical-mode 1))
+(use-package flycheck-clojure
+  :ensure t
+  :defer t
+  :config
+  (eval-after-load 'flycheck '(flycheck-clojure-setup)))
 
-;; (use-package projectile
-;;   :ensure t
-;;   :pin melpa-stable
-;;   :diminish projectile-mode
-;;   :config
-;;   (setq projectile-enable-caching t)
-;;   (projectile-global-mode 1))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; ido and smex
+(use-package smex
+  :ensure t
+  :bind (("M-x" . smex))
+  :config (smex-initialize))  ; smart meta-x (use IDO in minibuffer)
 
-;; (use-package company
-;;   :ensure t
-;;   :pin melpa-stable
-;;   :diminish company-mode
-;;   :config
-;;   (global-company-mode))
+(use-package ido
+  :ensure t
+  :demand t
+  :bind (("C-x b" . ido-switch-buffer))
+  :config (ido-mode 1)
+  (setq ido-create-new-buffer 'always  ; don't confirm when creating new buffers
+        ido-enable-flex-matching t     ; fuzzy matching
+        ido-everywhere t  ; tbd
+        ido-case-fold t)) ; ignore case
 
-;; (use-package paredit
-;;   :ensure t
-;;   :pin melpa-stable
-;;   :defer t
-;;   :diminish paredit-mode)
+(use-package ido-ubiquitous
+  :ensure t
+  :config (ido-ubiquitous-mode 1))
 
-;; (use-package rainbow-delimiters
-;;   :ensure t
-;;   :pin melpa-stable
-;;   :defer t)
+(use-package flx-ido
+  :ensure t
+  :config (flx-ido-mode 1))
 
-;; (use-package clojure-mode
-;;   :ensure t
-;;   :pin melpa-stable
-;;   :mode (("\\.clj\\'" . clojure-mode)
-;; 	 ("\\.edn\\'" . clojure-mode))
-;;   :config
-;;   (add-hook 'clojure-mode-hook #'eldoc-mode)
-;;   (add-hook 'clojure-mode-hook #'show-paren-mode)
-;;   (add-hook 'clojure-mode-hook #'paredit-mode)
-;;   (add-hook 'clojure-mode-hook #'rainbow-delimiters-mode))
-
-;; (use-package cider-eval-sexp-fu
-;;   :ensure t
-;;   :pin melpa-stable
-;;   :defer t)
-
-;; (use-package clj-refactor
-;;   :ensure t
-;;   :pin melpa-stable
-;;   :defer t)
-
-;; (use-package flycheck-clojure
-;;   :ensure t
-;;   :pin melpa
-;;   :defer t
-;;   :config
-;;   (eval-after-load 'flycheck '(flycheck-clojure-setup)))
-
-;; (use-package swiper
-;;   :ensure t
-;;   :pin melpa-stable
-;;   :bind (("\C-s" . swiper)))
-
-
+(use-package ido-vertical-mode
+  :ensure t
+  :config (ido-vertical-mode 1))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Display Tweaking
