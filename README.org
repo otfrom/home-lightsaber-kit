@@ -6,6 +6,8 @@
 
   git clone it to a nice location and then symbolically link it to ~/.emacs.d
 
+  Then symbolically link the profiles.clj to ~/.lein/profiles.clj
+
 * License
 
   GPL Probably.
