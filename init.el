@@ -245,11 +245,10 @@
 (line-number-mode 1)
 (column-number-mode 1)
 
-;; This really ought to be the default
-(setq ediff-window-setup-function 'ediff-setup-windows-plain)
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Other useful defaults
+
+(global-set-key (kbd "C-;") 'comment-dwim)
 
 ;; keep autobackups under control
 (setq
