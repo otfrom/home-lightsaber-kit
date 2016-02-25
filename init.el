@@ -47,18 +47,6 @@
 (require 'bind-key)
 (require 'diminish)
 
-;; Remember: :config only gets called when the *package* is loaded and
-;; some modes are defined in packages with different names.
-;; (use-package lisp-mode
-;;   :config
-;;   (progn
-;;     (add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode)
-;;     (add-hook 'emacs-lisp-mode-hook #'highlight-symbol-mode)
-;;     (add-hook 'emacs-lisp-mode-hook #'eldoc-mode)
-;;     (add-hook 'emacs-lisp-mode-hook #'rainbow-delimiters-mode)
-;;     (add-hook 'emacs-lisp-mode-hook #'show-paren-mode)
-;;     (add-hook 'emacs-lisp-mode-hook #'paredit-mode)))
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; minor modes
 (defvar lisp-mode-hooks '(emacs-lisp-mode-hook lisp-mode-hook))
