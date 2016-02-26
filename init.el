@@ -84,16 +84,16 @@
 (use-package aggressive-indent
   :ensure t
   :diminish aggressive-indent-mode
-  :init (bld/add-to-hooks #'aggressive-indent-mode lisp-mode-hooks))
+  :config (bld/add-to-hooks #'aggressive-indent-mode lisp-mode-hooks))
 
 (use-package eldoc
   :diminish eldoc-mode
-  :init (bld/add-to-hooks #'eldoc-mode (append lisp-mode-hooks lisp-interaction-mode-hook)))
+  :config (bld/add-to-hooks #'eldoc-mode (append lisp-mode-hooks lisp-interaction-mode-hook)))
 
 (use-package paredit
   :ensure t
   :diminish paredit-mode
-  :init (bld/add-to-hooks #'paredit-mode lisp-mode-hooks))
+  :config (bld/add-to-hooks #'paredit-mode lisp-mode-hooks))
 
 (use-package flycheck-pos-tip
   :ensure t
@@ -111,17 +111,16 @@
   :diminish highlight-symbol
   :bind (("M-n" . highlight-symbol-next)
          ("M-p" . highlight-symbol-prev))
-  :init (add-hook 'prog-mode-hook #'highlight-symbol-mode))
+  :config (add-hook 'prog-mode-hook #'highlight-symbol-mode))
 
 (use-package rainbow-delimiters
   :ensure t
   :diminish rainbow-delimiters
-  :init (bld/add-to-hooks #'rainbow-delimiters-mode
-                          (append lisp-mode-hooks lisp-interaction-mode-hook)))
+  :config (bld/add-to-hooks #'rainbow-delimiters-mode
+                            (append lisp-mode-hooks lisp-interaction-mode-hook)))
 
 (use-package paren
-  :init (dolist (hook (append lisp-mode-hooks lisp-interaction-mode-hook))
-          (add-hook hook #'show-paren-mode)))
+  :config (bld/add-to-hooks #'show-paren-mode (append lisp-mode-hooks lisp-interaction-mode-hook)))
 
 (use-package projectile
   :ensure t
