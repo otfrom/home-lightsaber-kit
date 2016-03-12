@@ -74,7 +74,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; minor modes
 (defvar lisp-mode-hooks '(emacs-lisp-mode-hook lisp-mode-hook clojure-mode-hook))
-(defvar lisp-interaction-mode-hooks '(lisp-interaction-modes-hook cider-mode-hook))
+(defvar lisp-interaction-mode-hooks '(lisp-interaction-modes-hook cider-mode-hook cider-repl-mode-hook))
 
 (defun bld/add-to-hooks (f hooks)
   "Add funcion F to all HOOKS."
@@ -88,12 +88,12 @@
 
 (use-package eldoc
   :diminish eldoc-mode
-  :config (bld/add-to-hooks #'eldoc-mode (append lisp-mode-hooks lisp-interaction-mode-hook)))
+  :config (bld/add-to-hooks #'eldoc-mode (append lisp-mode-hooks lisp-interaction-mode-hooks)))
 
 (use-package paredit
   :ensure t
   :diminish paredit-mode
-  :config (bld/add-to-hooks #'paredit-mode lisp-mode-hooks))
+  :config (bld/add-to-hooks #'paredit-mode (append lisp-mode-hooks lisp-interaction-mode-hooks)))
 
 (use-package flycheck-pos-tip
   :ensure t
@@ -117,10 +117,10 @@
   :ensure t
   :diminish rainbow-delimiters
   :config (bld/add-to-hooks #'rainbow-delimiters-mode
-                            (append lisp-mode-hooks lisp-interaction-mode-hook)))
+                            (append lisp-mode-hooks lisp-interaction-mode-hooks)))
 
 (use-package paren
-  :config (bld/add-to-hooks #'show-paren-mode (append lisp-mode-hooks lisp-interaction-mode-hook)))
+  :config (bld/add-to-hooks #'show-paren-mode (append lisp-mode-hooks lisp-interaction-mode-hooks)))
 
 (use-package projectile
   :ensure t
@@ -171,13 +171,13 @@
   :mode (("\\.clj\\'" . clojure-mode)
 	 ("\\.edn\\'" . clojure-mode)))
 
-(use-package cider-eval-sexp-fu
-  :ensure t)
+;; (use-package cider-eval-sexp-fu
+;;   :ensure t)
 
 (use-package clj-refactor
   :ensure t
   :defer t
-  :init (add-hook 'cider-mode-hook #'clj-refactor-mode))
+  :config (add-hook 'cider-mode-hook #'clj-refactor-mode))
 
 (use-package flycheck-clojure
   :ensure t
