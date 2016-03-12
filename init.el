@@ -153,17 +153,35 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; cider and clojure(script)
 
+;; good cider
 (use-package cider
   :ensure t
   :defer t
   :config
   (setq cider-repl-history-file (concat user-emacs-directory "cider-history")
+        cider-repl-history-size 1000
 	cider-font-lock-dynamically '(macro core function var)
-	cider-repl-use-clojure-font-lock t
-	cider-overlays-use-font-lock t
-	cider-repl-result-prefix ";; => "
-	cider-interactive-eval-result-prefix ";; => ")
-  (cider-repl-toggle-pretty-printing))
+        cider-overlays-use-font-lock t
+        cider-pprint-fn 'fipp
+        cider-cljs-lein-repl "(do (use 'figwheel-sidecar.repl-api) (start-figwheel!) (cljs-repl))"))
+
+;; bad cider config
+;; (add-hook 'cider-mode-hook #'cider-enlighten-mode) causes problems
+;; on cider-restart or other 2nd cider session
+;; (use-package cider
+;;   :ensure t
+;;   :defer t
+;;   :config
+;;   (setq cider-repl-history-file (concat user-emacs-directory "cider-history")
+;;         cider-repl-history-size 1000
+;; 	cider-font-lock-dynamically '(macro core function var)
+;;         cider-overlays-use-font-lock t
+;;         cider-pprint-fn 'fipp
+;;         cider-cljs-lein-repl "(do (use 'figwheel-sidecar.repl-api) (start-figwheel!) (cljs-repl))")
+;;   (add-hook 'cider-mode-hook #'cider-enlighten-mode))
+
+;; (eval-after-load 'cider
+;;   '(define-key cider-mode-map (kbd "C-c ,") 'cider-test-run-test))
 
 (use-package clojure-mode
   :ensure t
