@@ -246,6 +246,9 @@
 ;; Display Tweaking
 (load-theme 'wheatgrass)
 
+(when (memq window-system '(mac ns))
+  (set-default-font "-apple-Menlo-medium-normal-normal-*-12-*-*-*-m-0-iso10646-1"))
+
 ;; no toolbar
 (tool-bar-mode -1)
 
