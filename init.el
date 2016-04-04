@@ -195,7 +195,17 @@
 (use-package clj-refactor
   :ensure t
   :defer t
-  :config (add-hook 'cider-mode-hook #'clj-refactor-mode))
+  :config
+  (defun my-clj-refactor-hook ()
+    (message "Running cljr hook.")
+    (clj-refactor-mode 1)
+    (cljr-add-keybindings-with-prefix "C-c r"))
+  (add-hook 'clojure-mode-hook 'my-clj-refactor-hook))
+
+(use-package yasnippet
+  :ensure t
+  :defer t
+  :config (yas-global-mode 1))
 
 (use-package flycheck-clojure
   :ensure t
