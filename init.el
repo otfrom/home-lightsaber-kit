@@ -243,6 +243,12 @@
   :config (ido-vertical-mode 1))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Text Modes
+(use-package markdown-mode
+  :mode "\\.md\\'"
+  :ensure t)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Display Tweaking
 (load-theme 'wheatgrass)
 
