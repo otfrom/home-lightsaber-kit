@@ -35,6 +35,7 @@
         (ido-completing-read+ . "melpa-stable")
         (ido-ubiquitous . "melpa-stable")
         (ido-vertical-mode . "melpa-stable")
+        (ivy . "melpa")
         (flycheck-pos-tip . "melpa-stable")
         (flycheck . "melpa-stable")
         (highlight . "melpa") ;; woo! from the wiki https://www.emacswiki.org/emacs/highlight.el
@@ -52,7 +53,7 @@
         (s . "melpa-stable")
         (seq . "elpa")
         (smex . "melpa-stable")
-        (swiper . "melpa-stable")
+        (swiper . "melpa")
         (use-package . "melpa-stable")
         (with-editor . "melpa-stable")
         (yasnippet . "melpa-stable")))
